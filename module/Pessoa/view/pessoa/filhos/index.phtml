@@ -1,0 +1,60 @@
+<a class="btn btn-success" href="<?php echo $this->url('pessoa/default', array('controller' => 'filhos', 'action' => 'inserir')); ?>">Novo Filho</a>
+<br>
+
+<?php
+if ($this->success) {
+    echo '<div class="alert alert-success">' . $this->success[0] . '<button type="button" class="close" data-dismiss="alert">x</button></div>';
+}
+if ($this->error) {
+    echo '<div class="alert alert-danger">' . $this->error[0] . '<button type="button" class="close" data-dismiss="alert">x</button></div>';
+}
+?>
+<table class="table table-bordered table-striped table-hover table-condensed">
+    <caption>Todas os Filhos</caption>
+    <thead>
+        <tr class="subtitulo">
+            <th>Código</th>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Celular/Telefone</th>
+            <th>Ativo</th>
+            <th>Pai</th>
+            <th>Ação</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        /**
+         * @var $entity \Pessoa\Entity\Filho
+         */
+        ?>
+        <?php if ($this->data): ?>
+            <?php foreach ($this->data as $entity): ?>
+                <tr>
+
+                    <td><?php echo $entity->getId(); ?></td>
+                    <td><?php echo $entity->getNome(); ?></td>
+                    <td><?php echo ($entity->getEmail())? $entity->getEmail() :"---"; ?></td>
+                    <td><?php echo ($entity->getCelular())? $entity->getCelular() :"---"; ?></td>
+                    <td><?php echo $entity->getAtivo()? 'Sim': 'Não'; ?></td>
+                    <td><?php echo ($entity->getPessoa())? $entity->getPessoa()->getNome() : '---'; ?></td>
+                    <td>
+                        <a class="btn btn-success" href="<?php echo $this->url('pessoa/default', array('controller' => 'filhos', 'action' => 'editar', 'id' => $entity->getId())); ?>"><i class="glyphicon glyphicon-pencil"></i></a>
+
+                        <a class="btn btn-danger" href="<?php echo $this->url('pessoa/default', array('controller' => 'filhos', 'action' => 'excluir', 'id' => $entity->getId())); ?>"><i class="glyphicon glyphicon-remove-sign"></i></a>
+
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        <?php else: ?>
+        <p>Nenhum registro encontrado !!</p>
+    <?php endif; ?>
+</tbody>
+</table>
+<a class="btn btn-success" href="<?php echo $this->url('sonuser-admin/default', array('controller' => 'users')); ?>">Voltar</a>
+
+<?php echo $this->paginationControl($this->data, 'Sliding', 'partials/paginator', array('route' => 'pessoa/paginator')); ?>
+
+<style type="text/css">
+    .subtitulo{background: lightgray}
+</style>

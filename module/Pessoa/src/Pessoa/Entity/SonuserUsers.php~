@@ -1,0 +1,81 @@
+<?php
+
+namespace Pessoa\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * SonuserUsers
+ *
+ * @ORM\Table(name="sonuser_users")
+ * @ORM\Entity
+ */
+class SonuserUsers
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="ID", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="NOME", type="string", length=255, nullable=false)
+     */
+    private $nome;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="EMAIL", type="string", length=255, nullable=false)
+     */
+    private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="PASSWORD", type="string", length=255, nullable=true)
+     */
+    private $password;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="SALT", type="string", length=255, nullable=true)
+     */
+    private $salt;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ACTIVE", type="string", length=1, nullable=true)
+     */
+    private $active;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ACTIVATION_KEY", type="string", length=255, nullable=true)
+     */
+    private $activationKey;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="UPDATED_AT", type="datetime", nullable=false)
+     */
+    private $updatedAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="CREATED_AT", type="datetime", nullable=false)
+     */
+    private $createdAt;
+
+
+}

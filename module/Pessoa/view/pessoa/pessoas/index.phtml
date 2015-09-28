@@ -1,0 +1,63 @@
+<a class="btn btn-success" href="<?php echo $this->url('pessoa/default', array('controller' => 'pessoas', 'action' => 'inserir')); ?>">Nova Pessoa</a>
+<br>
+
+<?php
+if ($this->success) {
+    echo '<div class="alert alert-success">' . $this->success[0] . '<button type="button" class="close" data-dismiss="alert">x</button></div>';
+}
+if ($this->error) {
+    echo '<div class="alert alert-danger">' . $this->error[0] . '<button type="button" class="close" data-dismiss="alert">x</button></div>';
+}
+?>
+<table class="table table-bordered table-striped table-condensed">
+    <caption>Todas as Pessoas</caption>
+    <thead>
+        <tr class="subtitulo">
+            <th>Foto</th>
+            <th>Código</th>
+            <th>Nome</th>
+            <th>Classificação</th>
+            <th>Tel. Residencial</th>
+            <th>Cel. Pessoal</th>
+            <th>Email Pessoal</th>
+            <th>Ação</th>
+        </tr>
+
+    </thead>
+    <tbody>
+        <?php
+        /**
+         * @var $entity \Pessoa\Entity\Pessoa
+         */
+        ?>
+        <?php if ($this->data): ?>
+            <?php foreach ($this->data as $entity): ?>
+                <tr>
+
+                    <td><img src="/conteudos/imagens/<?php echo $entity->getImagem(); ?>" width="100" height="80"/></td>
+                    <td><?php echo $entity->getId();
+        $id = $entity->getId(); ?></td>
+                    <td><?php echo $entity->getNome(); ?></td>
+                    <td><?php echo ($entity->getClassification()) ? $entity->getClassification()->getDescricao() : '---'; ?></td>
+                    <td><?php echo $entity->getTelefoneResidencial(); ?></td>
+                    <td><?php echo $entity->getCelular(); ?></td>
+                    <td><?php echo $entity->getEmailPessoal(); ?></td>
+                    <td>
+                        <a class="btn btn-success" href="<?php echo $this->url('pessoa/default', array('controller' => 'pessoas', 'action' => 'editar', 'id' => $entity->getId())); ?>"><i class="glyphicon glyphicon-pencil"></i></a>
+                        <a class="btn btn-danger" href="<?php echo $this->url('pessoa/default', array('controller' => 'pessoas', 'action' => 'excluir', 'id' => $entity->getId())); ?>"><i class="glyphicon glyphicon-remove-sign"></i></a>
+                        <a class="btn btn-danger" href="<?php echo $this->url('pessoa/default', array('controller' => 'tesouraria', 'action' => 'index', 'id' => $entity->getId())); ?>?id=<?php echo $id; ?>"><i class="glyphicon glyphicon-usd"></i></a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+    <?php else: ?>
+        <p>Nenhum registro encontrado !!</p>
+<?php endif; ?>
+</tbody>
+</table>
+<a class="btn btn-success" href="<?php echo $this->url('sonuser-admin/default', array('controller' => 'users')); ?>">Voltar</a>
+
+<?php echo $this->paginationControl($this->data, 'Sliding', 'partials/paginator', array('route' => 'pessoas/paginator')); ?>
+
+<style type="text/css">
+    .subtitulo{background: lightgray}
+</style>

@@ -1,0 +1,173 @@
+<?php
+
+namespace Pessoa\Entity;
+
+use Base\Entity\AbstractEntity;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Membro
+ *
+ * @ORM\Table(name="ar_membro", indexes={@ORM\Index(name="FK_COMISSAO_1", columns={"comissao_id"})})
+ * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
+ * @ORM\Entity(repositoryClass="Pessoa\Entity\MembroRepository")
+ */
+class Membro extends AbstractEntity
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="membro", type="text", length=65535, nullable=true)
+     */
+    private $membro;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cargo", type="text", length=65535, nullable=true)
+     */
+    private $cargo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="data_inicio", type="string", length=10, nullable=true)
+     */
+    private $dataInicio;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="data_fim", type="string", length=10, nullable=true)
+     */
+    private $dataFim;
+
+    /**
+     * @var \Pessoa\Entity\Comissao
+     *
+     * @ORM\ManyToOne(targetEntity="Pessoa\Entity\Comissao")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="comissao_id", referencedColumnName="id")
+     * })
+     */
+    private $comissao;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId() {
+        return $this->id;
+    }
+
+    /**
+     * Get membro
+     *
+     * @return string 
+     */
+    public function getMembro() {
+        return $this->membro;
+    }
+    
+    /**
+     * Get cargo
+     *
+     * @return string 
+     */
+    public function getCargo() {
+        return $this->cargo;
+    }
+
+    /**
+     * Get data_inicio
+     *
+     * @return string 
+     */
+    public function getDataInicio() {
+        return $this->dataInicio;
+    }
+
+    /**
+     * Get data_fim
+     *
+     * @return string 
+     */
+    public function getDataFim() {
+        return $this->dataFim;
+    }
+
+    /**
+     * Get comissao
+     *
+     * @return \Pessoa\Entity\Comissao 
+     */
+    public function getComissao() {
+        return $this->comissao;
+    }
+
+    /**
+     * Set membro
+     *
+     * @param string $membro
+     * @return Membro
+     */
+    public function setMembro($membro) {
+        $this->membro = $membro;
+        return $this;
+    }
+
+    /**
+     * Set cargo
+     *
+     * @param string $cargo
+     * @return Membro
+     */
+    public function setCargo($cargo) {
+        $this->cargo = $cargo;
+        return $this;
+    }
+
+    /**
+     * Set data_inicio
+     *
+     * @param string $dataInicio
+     * @return Membro
+     */
+    public function setDataInicio($dataInicio) {
+        $this->dataInicio = $dataInicio;
+        return $this;
+    }
+    
+    /**
+     * Set data_fim
+     *
+     * @param string $dataFim
+     * @return Membro
+     */
+    public function setDataFim($dataFim) {
+        $this->dataFim = $dataFim;
+        return $this;
+    }
+
+    /**
+     * Set comissao
+     *
+     * @param \Pessoa\Entity\Comissao $comissao
+     * @return Membro
+     */
+    public function setComissao($comissao) {
+        $this->comissao = $comissao;
+        return $this;
+    }
+}

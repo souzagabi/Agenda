@@ -1,0 +1,158 @@
+<?php
+
+namespace Pessoa\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ArPessoa
+ *
+ * @ORM\Table(name="ar_pessoa", indexes={@ORM\Index(name="CLASSIFICATION_ID", columns={"CLASSIFICATION_ID"})})
+ * @ORM\Entity
+ */
+class ArPessoa
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="ID", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="NOME", type="string", length=255, nullable=false)
+     */
+    private $nome;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="DATA_ADMISSAO", type="string", length=15, nullable=true)
+     */
+    private $dataAdmissao;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ENDERECO_RESIDENCIAL", type="string", length=255, nullable=true)
+     */
+    private $enderecoResidencial;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="TELEFONE_RESIDENCIAL", type="string", length=15, nullable=true)
+     */
+    private $telefoneResidencial;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="EMAIL_PESSOAL", type="string", length=255, nullable=true)
+     */
+    private $emailPessoal;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="CELULAR", type="string", length=15, nullable=true)
+     */
+    private $celular;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ENDERECO_COMERCIAL", type="string", length=255, nullable=true)
+     */
+    private $enderecoComercial;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="TELEFONE_COMERCIAL", type="string", length=15, nullable=true)
+     */
+    private $telefoneComercial;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="EMAIL_COMERCIAL", type="string", length=255, nullable=true)
+     */
+    private $emailComercial;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="CONJUGE", type="string", length=100, nullable=true)
+     */
+    private $conjuge;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="CELULAR_CONJUGE", type="string", length=15, nullable=true)
+     */
+    private $celularConjuge;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="DATA_CADASTRO", type="datetime", nullable=true)
+     */
+    private $dataCadastro;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="DATA_ALTERACAO", type="datetime", nullable=false)
+     */
+    private $dataAlteracao;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ATIVO", type="string", length=1, nullable=true)
+     */
+    private $ativo;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="CLASSIFICATION_ID", type="integer", nullable=true)
+     */
+    private $classificationId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="IMAGEM", type="blob", nullable=false)
+     */
+    private $imagem;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="NOME_IMAGEM", type="string", length=50, nullable=false)
+     */
+    private $nomeImagem;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="TAMANHO_IMAGEM", type="integer", nullable=false)
+     */
+    private $tamanhoImagem;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="TIPO_IMAGEM", type="string", length=255, nullable=true)
+     */
+    private $tipoImagem;
+
+
+}

@@ -1,0 +1,27 @@
+<h3>Novo usuário</h3>
+<br />
+<?php
+$form = $this->form;
+if ($this->success)
+    echo '<div class="alert alert-success">' . $this->success[0] . '<button type="button" class="close" data-dismiss="alert">x</button></div>';
+
+if ($this->error)
+    echo '<div class="alert alert-warning">' . $this->error[0] . '<button type="button" class="close" data-dismiss="alert">x</button></div>';
+
+$this->formElementErrors()
+        ->setMessageOpenFormat('<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">x</button>')
+        ->setMessageCloseString('</div>')
+        ->render($form);
+$form->setAttribute('action', $this->url('sonuser-admin/default', array('controller' => 'users', 'action' => 'new')));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formCollection($form);
+echo $this->form()->closeTag();
+?>
+<br />
+<a class="btn btn-success" href="<?php echo $this->url('sonuser-admin/default', array('controller' => 'users')); ?>">Voltar</a>
+<style type="text/css">
+    input, textarea, label, select{display: block;}
+    
+</style>

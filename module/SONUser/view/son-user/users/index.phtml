@@ -1,0 +1,60 @@
+<h1>Usuários</h1>
+
+<br />
+
+<p>
+    <a class="btn btn-success" href="<?php echo $this->url('sonuser-admin/default', array('action' => 'new')); ?>">Novo Usuário</a>
+</p>
+<p>
+    <a class="btn btn-info" href="<?php echo $this->url('pessoa/default', array('controller' => 'pessoas')); ?>">Pessoa</a>
+    <a class="btn btn-info" href="<?php echo $this->url('pessoa/default', array('controller' => 'filhos')); ?>">Filho</a>
+    <a class="btn btn-info" href="<?php echo $this->url('pessoa/default', array('controller' => 'classificacao')); ?>">Classificação</a>
+    <a class="btn btn-info" href="<?php echo $this->url('classificacao/default', array('controller' => 'classificacao')); ?>">Reunião</a>
+    <a class="btn btn-info" href="<?php echo $this->url('membro/default', array('controller' => 'comissao')); ?>">Comissão</a>
+    <a class="btn btn-info" href="<?php echo $this->url('membro/default', array('controller' => 'membro')); ?>">Membros da Comissão</a>
+
+</p>
+
+<?php
+if ($this->success)
+    echo '<div class="alert alert-success">' . $this->success[0] . '<button type="button" class="close" data-dismiss="alert">x</button></div>';
+if ($this->error)
+    echo '<div class="alert alert-danger">' . $this->error[0] . '<button type="button" class="close" data-dismiss="alert">x</button></div>';
+?>
+
+<table class="table table-bordered table-striped table-hover table-condensed">
+    <caption>Todos Usuários</caption>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Ação</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php if ($this->data): ?>
+            <?php foreach ($this->data as $entity): ?>
+                <tr>
+
+                    <td><?php echo $entity->getId(); ?></td>
+                    <td><?php echo $entity->getNome(); ?></td>
+                    <td><?php echo $entity->getEmail(); ?></td>
+                    <td>
+                        <a class="btn btn-success" href="<?php echo $this->url('sonuser-admin/default', array('controller' => 'users', 'action' => 'edit', 'id' => $entity->getId()));
+                ?>"><i class="glyphicon glyphicon-pencil"></i></a>
+
+                        <a class="btn btn-danger" href="<?php echo $this->url('sonuser-admin/default', array('controller' => 'users', 'action' => 'delete', 'id' => $entity->getId()));
+                ?>"><i class="glyphicon glyphicon-remove-sign"></i></a>
+
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        <?php else: ?>
+        <p>Nenhum registro encontrado !!</p>
+    <?php endif; ?>
+</tbody>
+</table>
+<br />
+
+<?php echo $this->paginationControl($this->data, 'Sliding', 'partials/paginator', array('route' => 'sonuser/paginator')); ?>

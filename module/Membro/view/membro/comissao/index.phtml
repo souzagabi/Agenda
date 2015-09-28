@@ -1,0 +1,51 @@
+<a class="btn btn-success" href="<?php echo $this->url('membro/default', array('controller' => 'comissao', 'action' => 'inserir')); ?>">Nova Comissão</a>
+<br>
+
+<?php
+if ($this->success) {
+    echo '<div class="alert alert-success">' . $this->success[0] . '<button type="button" class="close" data-dismiss="alert">x</button></div>';
+}
+if ($this->error) {
+    echo '<div class="alert alert-danger">' . $this->error[0] . '<button type="button" class="close" data-dismiss="alert">x</button></div>';
+}
+?>
+<table class="table table-bordered table-striped table-hover table-condensed">
+    <caption>Todas as Comissões</caption>
+    <thead>
+        <tr class="subtitulo">
+            <th>Código</th>
+            <th>Descrição</th>
+            <th>Ação</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        /**
+         * @var $entity \Pessoa\Entity\Classificacao
+         */
+        ?>
+        <?php if ($this->data): ?>
+            <?php foreach ($this->data as $entity): ?>
+                <tr>
+
+                    <td><?php echo $entity->getId(); ?></td>
+                    <td><?php echo $entity->getDescricao(); ?></td>
+                    <td>
+                        <a class="btn btn-success" href="<?php echo $this->url('membro/default', array('controller' => 'comissao', 'action' => 'editar', 'id' => $entity->getId())); ?>"><i class="glyphicon glyphicon-pencil"></i></a>
+
+                        <a class="btn btn-danger" href="<?php echo $this->url('membro/default', array('controller' => 'comissao', 'action' => 'excluir', 'id' => $entity->getId())); ?>"><i class="glyphicon glyphicon-remove-sign"></i></a>
+
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        <?php else: ?>
+        <p>Nenhum registro encontrado !!</p>
+    <?php endif; ?>
+</tbody>
+</table>
+<a class="btn btn-success" href="<?php echo $this->url('sonuser-admin/default', array('controller' => 'users')); ?>">Voltar</a>
+
+<?php echo $this->paginationControl($this->data, 'Sliding', 'partials/paginator', array('route' => 'membro/paginator')); ?>
+<style type="text/css">
+    .subtitulo{background: lightgray}
+</style>

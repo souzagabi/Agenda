@@ -1,0 +1,72 @@
+<a class="btn btn-success" href="<?php echo $this->url('classificacao/default', array('controller' => 'classificacao', 'action' => 'inserir')); ?>">Nova Classificação</a>
+<br>
+
+<?php
+if ($this->success) {
+    echo '<div class="alert alert-success">' . $this->success[0] . '<button type="button" class="close" data-dismiss="alert">x</button></div>';
+}
+if ($this->error) {
+    echo '<div class="alert alert-danger">' . $this->error[0] . '<button type="button" class="close" data-dismiss="alert">x</button></div>';
+}
+?>
+<table class="table table-bordered table-striped table-hover table-condensed">
+    <caption>Todas as Reuniões</caption>
+    <thead>
+        <tr class="subtitulo">
+            <th>Data</th>
+            <th>Eventos</th>
+            <th>Pauta</th>
+            <th>Cardápio</th>
+            <th>Lista de Presente</th>
+            <th>Ata</th>
+            <th>Imagem</th>
+            <th>Tipo Imagem</th>
+            <th>Ação</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        /**
+         * @var $entity \Classificacao\Entity\Reuniao
+         */
+        ?>
+        <?php if ($this->data): ?>
+            <?php foreach ($this->data as $entity): ?>
+                <tr>
+
+                    <td><?php echo ($entity->getData()) ? $entity->getData() : '****'; //->format('d/m/Y')    ?></td>
+                    <td><?php echo $entity->getEventos(); ?></td>
+                    <td><?php echo ($entity->getPauta()) ? $entity->getPauta() : '****'; ?></td>
+                    <td><textarea cols="25" rows="5" readonly="readonly"><?php echo ($entity->getCardapio()) ? $entity->getCardapio() : '****'; ?>" </textarea></td>
+                    <td><textarea cols="25" rows="5" readonly="readonly"><?php echo ($entity->getListaPresente()) ? $entity->getListaPresente() : '****'; ?></textarea></td>
+                    <td><?php echo ($entity->getAta()) ? $entity->getAta() : '****'; ?></td>
+                    <td>
+                        <?php
+                        $dir = "conteudos/imgReuniao/";
+                        
+                        $imageData = $entity->getImagens();
+
+                        $imgType = $entity->getTipoImagem();
+
+                        $imagem = $imageData . $imgType;
+                        ?>
+                        <img src="/conteudos/imgReuniao/<?php echo $entity->getTipoImagem();?>" width="100" height="80"/></td>
+                    <td><?php echo ($entity->getTipoImagem()) ? $entity->getTipoImagem() : '****'; ?></td>
+                                        <!--<td><img src="/conteudos/imgReuniao/<?php //echo $entity->getImagens(); ?>" width="100" height="80"/></td>-->
+                    <td>
+                        <a class="btn btn-success" href="<?php echo $this->url('classificacao/default', array('controller' => 'classificacao', 'action' => 'editar', 'id' => $entity->getId())); ?>"><i class="glyphicon glyphicon-pencil"></i></a>
+                        <a class="btn btn-danger" href="<?php echo $this->url('classificacao/default', array('controller' => 'classificacao', 'action' => 'excluir', 'id' => $entity->getId())); ?>"><i class="glyphicon glyphicon-remove-sign"></i></a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        <?php else: ?>
+        <p>Nenhum registro encontrado !!</p>
+    <?php endif; ?>
+</tbody>
+</table>
+<a class="btn btn-success" href="<?php echo $this->url('sonuser-admin/default', array('controller' => 'users')); ?>">Voltar</a>
+
+<?php echo $this->paginationControl($this->data, 'Sliding', 'partials/paginator', array('route' => 'classificacao/paginator')); ?>
+<style type="text/css">
+    .subtitulo{background: lightgray}
+</style>
